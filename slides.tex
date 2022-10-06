@@ -1,0 +1,130 @@
+\documentclass[aspectratio=169,fleqn]{beamer}
+
+% fake small caps
+\newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
+\def\fauxschelper#1 #2\relax{%
+  \fauxschelphelp#1\relax\relax%
+  \if\relax#2\relax\else\ \fauxschelper#2\relax\fi%
+}
+\def\Hscale{.83}\def\Vscale{.72}\def\Cscale{1.00}
+\def\fauxschelphelp#1#2\relax{%
+  \ifnum`#1=\lccode`#1\relax\scalebox{\Hscale}[\Vscale]{\char\uccode`#1}\else%
+    \scalebox{\Cscale}[1]{#1}\fi%
+  \ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
+
+\renewcommand{\textsc}[1]{\fauxsc{#1}}
+
+\usetheme[block=fill, numbering=fraction, progressbar=head, subsectionpage=progressbar]{metropolis}
+\usefonttheme[onlymath]{serif}
+\setsansfont{GeosansLight}[
+  Path={beamer-resources/fonts/},
+  UprightFont={GeosansLight.ttf},
+  BoldFont={GeosansLight-Bold.ttf},
+  ItalicFont={GeosansLight-Oblique.ttf},
+  ]
+\setmonofont{FiraCode-VF}[
+  Path={beamer-resources/fonts/}
+]
+\definecolor{mDarkTeal}{HTML}{000000}
+\definecolor{mLightBrown}{HTML}{2979ff}
+%\definecolor{mLightGreen}{HTML}{EB811B}
+\definecolor{hiddengray}{HTML}{a3a3a3}
+
+
+% \usepackage{csquotes, xspace, amssymb, stmaryrd, mathtools, bussproofs}
+
+% \usepackage{graphicx}
+
+% \usepackage{appendixnumberbeamer} 
+% \usepackage[backend=biber,style=alphabetic]{biblatex}
+% \usepackage{url}
+% \addbibresource{biblio.bib}
+
+\makeatletter
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[%
+      wd=\paperwidth,%
+      sep=0pt,%
+      leftskip=\metropolis@frametitle@padding,%
+      rightskip=\metropolis@frametitle@padding,%
+    ]{frametitle}%
+  \metropolis@frametitlestrut@start%
+  \insertframetitle%
+  \nolinebreak%
+  \metropolis@frametitlestrut@end%
+  \hfill
+  \raisebox{-0.6ex}{\includegraphics[height=3ex,keepaspectratio]{beamer-resources/logos/logo2-short-neg.pdf}}
+  \end{beamercolorbox}%
+}
+\makeatother
+
+\setbeamertemplate{frame footer}{%
+\ifx\insertsection\empty\else%
+\raisebox{-0.6ex}{\includegraphics[height=3ex]{beamer-resources/logos/logo1-short.pdf}}\hspace{3ex}%
+\insertsection%
+\ifx\insertsubsection\empty\else{ - \insertsubsection}\fi\fi}
+
+\titlegraphic{%
+  \includegraphics[height=0.15\textheight]{beamer-resources/logos/logo1-long.pdf}\hfill
+  \includegraphics[height=0.15\textheight]{beamer-resources/logos/logo2-long.pdf}
+}
+
+\usetikzlibrary{calc}
+\newenvironment{emphblock}[1]{    \begingroup
+\setbeamercolor{block title}{use=structure,fg=bg,bg=black}
+\setbeamercolor{block body}{use=structure,fg=bg,bg=black!80!bg}
+\setbeamertemplate{itemize items}{{\color{white}\textbullet}}
+\begin{block}{#1}}{
+\end{block}%
+\endgroup}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[small]{Title}
+
+
+\subtitle{subtitle}
+
+
+\institute[School]{School, City, Country}
+   
+\date{\today}
+
+
+\begin{document}
+  \begin{frame}
+    \titlepage
+  \end{frame}      
+
+  \begin{frame}{Table of contents}
+    \tableofcontents[hideallsubsections]
+  \end{frame}
+
+  \section{A section}
+  \subsection{A subsection}
+
+  \begin{frame}{Example}
+    Here is how math looks
+    \[
+      1+1=2
+    \]
+  \end{frame}
+  
+  \begin{frame}{Blocks}
+    \begin{block}{Light block}
+      content
+    \end{block}
+    \pause
+    \begin{emphblock}{Dark block}
+      even better content
+    \end{emphblock}
+  \end{frame}
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
